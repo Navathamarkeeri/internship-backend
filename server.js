@@ -25,12 +25,12 @@ app.use((req, res, next) => {
 app.use('/api/auth', authRoutes);  
 app.use('/api/internships', internshipRoutes);   // ✅ CORRECT
 // ADD THIS DEBUG CODE:
-console.log('Available internship routes:');
-internshipRoutes.stack.forEach((middleware) => {
-  if (middleware.route) {
-    console.log(`- ${Object.keys(middleware.route.methods).join(', ').toUpperCase()} ${middleware.route.path}`);
-  }
-});
+//console.log('Available internship routes:');
+//internshipRoutes.stack.forEach((middleware) => {
+ // if (middleware.route) {
+  //  console.log(`- ${Object.keys(middleware.route.methods).join(', ').toUpperCase()} ${middleware.route.path}`);
+ // }
+//});
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
