@@ -14,6 +14,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors({ origin: "https://your-frontend.onrender.com" }));
 
 // Request logging middleware
 app.use((req, res, next) => {
