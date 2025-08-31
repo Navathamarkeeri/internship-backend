@@ -43,10 +43,22 @@ mongoose.connect(process.env.MONGO_URI)
     console.log('3. Ensure internet connection is stable');
   });
 
-// Test route
-app.get('/', (req, res) => {
-  res.send('Backend is running! 🚀');
-});
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  const path = require('path');
+  app.use(express.static(path.join(__dirname, '../internship-frontend/build')));
+
+  // Handle React routing, return all requests to React app
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../internship-frontend/build', 'index.html'));
+  });
+} else {
+  // Test route for development
+  app.get('/', (req, res) => {
+    res.send('Backend is running in development mode! ');
+  });
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {
